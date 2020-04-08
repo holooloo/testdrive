@@ -1,4 +1,4 @@
-# Задание
+# Задание 1
  - Реализовать тривиальное HTTP "Hello, world!" web-приложение на любом удобном Вам языке программирования и завернуть его в clound native окружение.
 
 # Реализация 
@@ -12,3 +12,14 @@
 # Метрики
  - Посмотреть метрики можно в Grafana обратившись к порту 3000 и ввести логин/пароль: admin/testdrive
  - Также можно обратиться через curl по адресу http://ip:5000/metrics
+
+
+# Задание 2
+Hi, in this practical test we expect you to show skills at IaC, cloud configuration management and web application deployment. Solution should be published as a git repo. You can use any tools that you want, there is no any limitations on that side.
+1. Setup a Kubernetes cluster
+2. Install Nginx Ingress
+3. Deploy basic web application
+4. Setup prometheus operator end expose Prometheus and Alertmanager
+5. Expose metrics from application to Prometheus
+6. Set up Grafana and expose a public Grafana dashboard
+7. Add dashboard in Grafana for Nginx ingress controller and your web application

@@ -23,3 +23,8 @@ Hi, in this practical test we expect you to show skills at IaC, cloud configurat
 5. Expose metrics from application to Prometheus
 6. Set up Grafana and expose a public Grafana dashboard
 7. Add dashboard in Grafana for Nginx ingress controller and your web application
+
+Grafana - http://grafana.gcp.megaanton.ru  (admin/prom-operator)
+Application - http://app.gcp.megaanton.ru
+Prometheus - http://prometheus.gcp.megaanton.ru
+Alertmanager - http://alertmanager.gcp.megaanton.ru

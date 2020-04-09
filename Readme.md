@@ -1,4 +1,4 @@
-# Задание 1
+# Задание 1 - docker-compose  
  - Реализовать тривиальное HTTP "Hello, world!" web-приложение на любом удобном Вам языке программирования и завернуть его в clound native окружение.
 
 # Реализация 
@@ -10,11 +10,11 @@
  - Все оформлено в docker-compose.yml файл, который запускает приложение со всеми необходимыми образами.
 
 # Метрики
- - Посмотреть метрики можно в Grafana обратившись к порту 3000 и ввести логин/пароль: admin/testdrive
- - Также можно обратиться через curl по адресу http://ip:5000/metrics
-
-
-# Задание 2
+ - Посмотреть метрики можно в Grafana обратившись к порту 3000 и ввести логин/пароль: admin/testdrive  
+ - Также можно обратиться через curl по адресу http://ip:5000/metrics  
+  
+  
+# Задание 2 - k8s  
 Hi, in this practical test we expect you to show skills at IaC, cloud configuration management and web application deployment. Solution should be published as a git repo. You can use any tools that you want, there is no any limitations on that side.
 1. Setup a Kubernetes cluster
 2. Install Nginx Ingress
@@ -24,7 +24,7 @@ Hi, in this practical test we expect you to show skills at IaC, cloud configurat
 6. Set up Grafana and expose a public Grafana dashboard
 7. Add dashboard in Grafana for Nginx ingress controller and your web application
 
-Grafana - http://grafana.gcp.megaanton.ru  (admin/prom-operator)
-Application - http://app.gcp.megaanton.ru
-Prometheus - http://prometheus.gcp.megaanton.ru
-Alertmanager - http://alertmanager.gcp.megaanton.ru
+Grafana - http://grafana.gcp.megaanton.ru  (admin/prom-operator)  
+Application - http://app.gcp.megaanton.ru  
+Prometheus - http://prometheus.gcp.megaanton.ru  
+Alertmanager - http://alertmanager.gcp.megaanton.ru  

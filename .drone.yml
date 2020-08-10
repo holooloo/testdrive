@@ -18,9 +18,9 @@ steps:
     image: plugins/ecr
     settings:
       access_key:
-      	from_secret: AWS_ACCESS_KEY_ID
+        from_secret: AWS_ACCESS_KEY_ID
       secret_key:
-      	from_secret: AWS_SECRET_ACCESS_KEY
+        from_secret: AWS_SECRET_ACCESS_KEY
       create_repository: true
       repo: test
       registry: 682379059715.dkr.ecr.eu-central-1.amazonaws.com

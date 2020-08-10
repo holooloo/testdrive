@@ -9,7 +9,7 @@ steps:
   - name: check
     image: docker
     commands:
-      - binary/build.sh
+      - env
     when:
       event:
         - push

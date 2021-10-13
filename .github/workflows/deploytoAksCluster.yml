@@ -1,0 +1,65 @@
+on: [push]
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@master
+    
+    - uses: azure/docker-login@v1
+      with:
+        login-server: stenn.azurecr.io
+        username: ${{ secrets.acr_stenn_username }}
+        password: ${{ secrets.acr_stenn_password }}
+    
+    - name: Build and push image to ACR
+      id: build-image
+      run: |
+        docker build "$GITHUB_WORKSPACE/" -f  "Dockerfile" -t stenn.azurecr.io/terraformaksdevcluster:${{ github.sha }} --label dockerfile-path=Dockerfile
+        docker push stenn.azurecr.io/terraformaksdevcluster:${{ github.sha }}
+    
+    - uses: azure/k8s-set-context@v1
+      with:
+         kubeconfig: ${{ secrets.aks_terraformaksdevcluster_kubeConfig }}
+      id: login
+    
+    - name: Create namespace
+      run: |
+        namespacePresent=`kubectl get namespace | grep terraform-aks-dev-clustera4b7 | wc -l`
+        if [ $namespacePresent -eq 0 ]
+        then
+            echo `kubectl create namespace terraform-aks-dev-clustera4b7`
+        fi
+
+    - uses: azure/k8s-create-secret@v1
+      with:
+        namespace: terraform-aks-dev-clustera4b7
+        container-registry-url: stenn.azurecr.io
+        container-registry-username: ${{ secrets.acr_stenn_username }}
+        container-registry-password: ${{ secrets.acr_stenn_password }}
+        secret-name: terraformaksdockerauth
+       
+    - uses: azure/k8s-bake@v1
+      with:
+        renderEngine: 'helm'
+        helmChart: nginx-ingress
+        releaseName: 'aks-helm-release'
+        helm-version: 'latest' 
+        silent: 'false'
+        overrideFiles: |
+          
+        overrides: |
+          replicas:2
+          image.repository:stenn.azurecr.io/terraformaksdevcluster
+          image.tag:${{ github.sha }}
+          imagePullSecrets:
+            -name:terraformaksdockerauth
+      id: bake
+
+    - uses: azure/k8s-deploy@v1.2
+      with:
+        namespace: terraform-aks-dev-clustera4b7
+        manifests: ${{ steps.bake.outputs.manifestsBundle }}
+        images: |
+          stenn.azurecr.io/terraformaksdevcluster:${{ github.sha }}
+        imagepullsecrets: |
+          terraformaksdockerauth

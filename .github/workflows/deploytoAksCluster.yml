@@ -14,6 +14,7 @@ jobs:
     - name: Build and push image to ACR
       id: build-image
       run: |
+        echo $AKS_TERRAFORMAKSDEVCLUSTER_KUBECONFIG
         docker build "$GITHUB_WORKSPACE/" -f  "Dockerfile" -t stenn.azurecr.io/terraformaksdevcluster:${{ github.sha }} --label dockerfile-path=Dockerfile
         docker push stenn.azurecr.io/terraformaksdevcluster:${{ github.sha }}
     
